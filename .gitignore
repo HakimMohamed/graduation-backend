@@ -1,0 +1,38 @@
+# Dependency directories
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Log files
+log/
+logs/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Compiled binary addons
+node_modules/**/*.node
+
+# OS or editor-generated files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+._*
+*~
+.vscode/
+.idea/
+
+# IDE configuration files
+*.iml
+
+# Project specific config
+config.js
