@@ -52,13 +52,12 @@ course.deleteCourse = async (req, res) => {
 course.updateCourse = async (req, res) => {
 	const courseId = req.params.id;
 	const { courseCode, course_name, start_time, end_time, day_of_week } = req.body;
+	let updates = [courseCode, course_name, start_time, end_time, day_of_week];
 
+	console.log(updates);
 	// if course code is null return course code is null
 	try {
-		const course = await Course.updateOne(
-			{ courseCode: courseId },
-			{ courseCode, course_name, start_time, end_time, day_of_week }
-		);
+		const course = await Course.updateOne({ courseCode: courseId }, updates);
 		res.status(200).json(`updated course ${courseId}`);
 	} catch (err) {
 		res.status(400).json({ err: err.message });

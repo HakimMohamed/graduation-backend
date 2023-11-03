@@ -1,4 +1,3 @@
-const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -25,7 +24,10 @@ const courseSchema = new Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{
+		collection: 'Courses',
+		timestamps: true,
+	}
 );
 
 const CourseSchema = mongoose.model('Course', courseSchema);

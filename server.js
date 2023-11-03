@@ -3,11 +3,14 @@ const express = require('express');
 const app = express();
 const testRoutes = require('./routes/test');
 const connectDB = require('./db/connect');
+
 const course = require('./routes/course');
+const user = require('./routes/users');
 
 app.use(express.json());
 app.use('/api/test', testRoutes);
 app.use('/api/course', course);
+app.use('/api/user', user);
 
 const port = process.env.PORT || 3000;
 
