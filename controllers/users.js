@@ -11,7 +11,7 @@ userController.signUp = async (req, res) => {
 		if (!name || !password || !email) {
 			return res.status(400).json({ message: 'Username, password, email are required.' });
 		}
-
+		console.log('please check your email');
 		const user = await User.findOne({ email });
 		if (user) {
 			return res.status(400).json({ message: 'User already exists.' });
