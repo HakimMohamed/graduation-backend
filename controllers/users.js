@@ -9,12 +9,13 @@ userController.register = async (req, res) => {
 		const { name, email, password } = req.body;
 
 		if (!name || !password || !email) {
-			return res.status(400).json({ message: 'Username, password, email are required.' });
+			return res.status(200).json({ msg: 'Username, password, email are required.' });
 		}
 
 		const user = await User.findOne({ email });
 		if (user) {
-			return res.status(400).json({ message: 'User already exists.' });
+			console.log('already');
+			return res.status(200).json({ msg: 'Exists' });
 		}
 
 		const hashedPassword = await bcrypt.hash(password, 10);
@@ -23,7 +24,7 @@ userController.register = async (req, res) => {
 		await User.create(newUser);
 
 		const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
+		console.log('login');
 		return res.status(200).json({ msg: 'User Created Successfully', token: token });
 	} catch (err) {
 		res.status(400).json({ err: err.message });
@@ -35,12 +36,12 @@ userController.login = async (req, res) => {
 		const { email, password } = req.body;
 
 		if (!password || !email) {
-			return res.status(400).json({ message: 'Username, password, email are required.' });
+			return res.status(400).json({ msg: 'Username, password, email are required.' });
 		}
 
 		const user = await User.findOne({ email });
 		if (!user) {
-			return res.status(400).json({ message: 'User does not exists.' });
+			return res.status(400).json({ msg: 'User does not exists.' });
 		}
 
 		const hashedPassword = await bcrypt.compare(password, user.password);
@@ -49,7 +50,7 @@ userController.login = async (req, res) => {
 			const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 			return res.status(200).json({ msg: 'Success', token: token });
 		} else {
-			return res.status(401).json({ message: 'Invalid username or password.' }, token);
+			return res.status(200).json({ msg: 'Invalid username or password.' });
 		}
 	} catch (err) {
 		res.status(400).json({ err: err.message });
