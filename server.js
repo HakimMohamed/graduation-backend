@@ -3,9 +3,11 @@ const express = require('express');
 const app = express();
 const testRoutes = require('./routes/test');
 const connectDB = require('./db/connect');
+const cors = require('cors');
 
 const course = require('./routes/course');
 const user = require('./routes/users');
+app.use(cors());
 
 app.use(express.json());
 app.use('/api/test', testRoutes);
