@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const userController = {};
 // get all Courses
-userController.signUp = async (req, res) => {
+userController.register = async (req, res) => {
 	try {
 		const { name, email, password } = req.body;
 
@@ -30,7 +30,7 @@ userController.signUp = async (req, res) => {
 	}
 };
 
-userController.signIn = async (req, res) => {
+userController.login = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
@@ -47,7 +47,7 @@ userController.signIn = async (req, res) => {
 
 		if (hashedPassword) {
 			const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-			return res.status(200).json({ msg: 'Login Successfull', token: token });
+			return res.status(200).json({ msg: 'Success', token: token });
 		} else {
 			return res.status(401).json({ message: 'Invalid username or password.' }, token);
 		}
