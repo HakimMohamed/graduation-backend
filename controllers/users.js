@@ -41,7 +41,7 @@ userController.login = async (req, res) => {
 
 		const user = await User.findOne({ email });
 		if (!user) {
-			return res.status(400).json({ msg: 'User does not exists.' });
+			return res.status(200).json({ msg: 'User does not exists.' });
 		}
 
 		const hashedPassword = await bcrypt.compare(password, user.password);
